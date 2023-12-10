@@ -5,7 +5,7 @@ const createGoal = async (req, res) => {
     // TODO: Implement logic to create a new goal
     // Retrieve data from req.body, create a new goal, and save it to the database
     // Example response when goal is created successfully:
-    const result = await Goal.create();
+    const result = await Goal.create(req.body);
     res.status(201).json({ message: 'Goal created successfully', goal: result });
   } catch (error) {
     res
@@ -37,7 +37,7 @@ const getGoals = async (req, res) => {
 };
 
 const getGoalById = async (req, res) => {
-  const goalId = req.params.id;
+  const id = req.params.id;
 
   try {
     // TODO: Implement logic to retrieve a goal by ID
@@ -46,7 +46,7 @@ const getGoalById = async (req, res) => {
     // res.status(200).json(goal);
     // Example response when goal is not found:
     // res.status(404).json({ message: 'Goal not found' });
-    const result = await Goal.findById(goalId);
+    const result = await Goal.findById(id);
     if(result){
       res.status(200).json(result);
     }
@@ -162,7 +162,7 @@ const getGoalsByDeadline = async (req, res) => {
     // Retrieve goals from the database based on the 'deadline' parameter
     // Example response when goals are found:
     // Example response when no goals are found:
-    const result = await Goal.find({deadline})
+    const result = await Goal.find({deadline:deadline})
     if(result){
       res.status(200).json(goals);
     }
