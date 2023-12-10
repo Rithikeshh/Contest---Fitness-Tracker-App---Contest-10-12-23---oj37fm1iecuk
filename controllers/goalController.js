@@ -164,7 +164,7 @@ const getGoalsByDeadline = async (req, res) => {
     // Example response when no goals are found:
     const result = await Goal.find({deadline:deadline})
     if(result){
-      res.status(200).json(goals);
+      res.status(200).json(result);
     }
     else{
       res.status(404).json({ message: 'No goals found before the given deadline' });
